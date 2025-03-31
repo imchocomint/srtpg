@@ -1,1 +1,1 @@
-<?php include_once("srtpg"); ?>
+<?php include_once("srtpg.html"); ?>
