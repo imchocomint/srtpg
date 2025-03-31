@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>srtpg</title>
+    <style>
+        /* Configuration section: Set colors here */
+        :root {
+            --button-color: #00d9ff; /* Change this to set the button color */
+            --text-color: #3689aa; /* Change this to set the text color */
+        }
+        
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Google Sans', sans-serif;
+            background-image: url('https://images6.alphacoders.com/113/thumb-1920-1131146.png'); /* Change this URL to configure background */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            text-align: center;
+        }
+        .blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 1;
+        }
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+            z-index: 2;
+        }
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #dcdcdc;
+            border-radius: 24px;
+            width: 400px;
+            opacity: 0.8; /* Slight transparency */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background: var(--button-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 24px;
+            margin-left: 10px;
+            transition: background-color 0.3s;
+        }
+        .date-time {
+            font-size: 24px;
+            margin: 10px;
+            color: var(--text-color);
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="blur-layer"></div>
+    <div class="date-time" id="dateTimeDisplay"></div>
+    <div class="search-box">
+        <input type="text" class="search-input" placeholder="Search Google..." id="searchInput">
+        <button class="search-button" id="searchButton" onclick="performGoogleSearch()">Search</button>
+    </div>
+
+    <script>
+        function performGoogleSearch() {
+            const query = document.getElementById('searchInput').value;
+            window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour24: true };
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('dateTimeDisplay').innerHTML = 
+                now.toLocaleString('en-US', timeOptions) + '<br>' + now.toLocaleString('en-US', dateOptions);
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
